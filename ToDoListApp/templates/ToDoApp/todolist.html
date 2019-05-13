@@ -4,8 +4,22 @@
 <h4>To-Do List:</h4>
 <ul>
   {% for content in contents %}
-  <li>{{content}}</li>
+  <li>
+    <form style="display:inline;" action="/ToDoApp/DeleteATask/{{content.id}}" method="POST">
+      {{content}}
+      <input type="submit" value="-">
+    </form>
+  </li>
+
   {% endfor %}
 </ul>
-
+<div class="container">
+  <div class="jumbotron">
+    <form action="/ToDoApp/toDoList/" method="POST">
+      {%csrf_token%}
+      <input type="text" name="content" placeholder="Do a task">
+    <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+  </div>
+</div>
 {% endblock %}
