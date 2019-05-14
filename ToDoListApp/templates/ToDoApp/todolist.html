@@ -5,21 +5,20 @@
 <ul>
   {% for content in contents %}
   <li>
-    <form style="display:inline;" action="/ToDoApp/DeleteATask/{{content.id}}" method="POST">
+    <form style="display:inline;" action="/ToDoApp/DeleteATask/" method="POST">
       {{content}}
-      <input type="submit" value="-">
+      {%csrf_token%}
+    <input type="hidden" name="num" value="{{content.id}}">
+    <input type="submit" class="btn btn-danger" value="-">
     </form>
   </li>
-
   {% endfor %}
 </ul>
 <div class="container">
-  <div class="jumbotron">
     <form action="/ToDoApp/toDoList/" method="POST">
       {%csrf_token%}
       <input type="text" name="content" placeholder="Do a task">
-    <input type="submit" class="btn btn-primary" value="Submit">
+    <input type="submit" class="btn btn-success" value="Submit">
     </form>
-  </div>
 </div>
 {% endblock %}

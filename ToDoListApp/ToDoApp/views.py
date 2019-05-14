@@ -10,6 +10,8 @@ def todo(request):
 def toDoListView(request):
     if request.method == 'POST':
         c = request.POST['content']
+        print(ToDoClass.objects.all().filter(content = c).exist())
+        ToDoClass.objects.all()
         toDoTask = ToDoClass(content = c)
         toDoTask.save()
         return todo(request)
@@ -17,7 +19,7 @@ def toDoListView(request):
         print('Error:NOT POST')
 def DeleteATaskView(request):
         if request.method == 'POST':
-            deleteTaskId = request.POST['id']
+            deleteTaskId = request.POST['num']
             deleteTask = ToDoClass.objects.get(id = deleteTaskId)
             deleteTask.delete()
             return todo(request)
