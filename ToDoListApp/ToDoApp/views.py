@@ -10,10 +10,12 @@ def todo(request):
 def toDoListView(request):
     if request.method == 'POST':
         c = request.POST['content']
-        print(ToDoClass.objects.all().filter(content = c).exist())
-        ToDoClass.objects.all()
-        toDoTask = ToDoClass(content = c)
-        toDoTask.save()
+        print(c)
+        print(ToDoClass.objects.all())
+        print(ToDoClass.objects.all().filter(content = c).exists())
+        if ToDoClass.objects.all().filter(content = c).exists() != True:
+            toDoTask = ToDoClass(content = c)
+            toDoTask.save()
         return todo(request)
     else:
         print('Error:NOT POST')
